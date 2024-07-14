@@ -24,7 +24,7 @@ export default function RootLayout({
       <body
         className={cn(
           "h-screen bg-background font-sans antialiased",
-          fontSans.variable,
+          fontSans.variable
         )}
       >
         <SuperTokensProvider>

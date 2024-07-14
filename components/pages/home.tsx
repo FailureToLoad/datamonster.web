@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { TryRefreshComponent } from "./tryRefreshClient";
-import { SessionAuthHelper } from "./sessionAuthHelper";
+import { TryRefreshComponent } from "../tryRefreshClient";
+import { SessionAuthHelper } from "../sessionAuthHelper";
 import jwksClient from "jwks-rsa";
 import JsonWebToken from "jsonwebtoken";
 import type { JwtHeader, JwtPayload, SigningKeyCallback } from "jsonwebtoken";

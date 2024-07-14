@@ -1,10 +1,9 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
+
 import Link from "next/link";
 import { CreateSettlementDialogue } from "@/app/createSettlementDialog";
-import { SessionAuthHelper } from "@/components/sessionAuthHelper";
-import { getSettlements } from "./actions";
 
 export type Settlement = {
   id: string;
@@ -38,11 +37,11 @@ function SettlementCard({ settlement }: { settlement: Settlement }) {
   );
 }
 
-async function SettlementSelector() {
-  const settlements: Array<Settlement> = await getSettlements();
+function SettlementSelector() {
+  const settlements: Array<Settlement> = [];
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden w-full">
+    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
       <ul className="w-1/4 space-y-4 ">
         {settlements &&
           settlements.map((settlement) => (
@@ -58,12 +57,4 @@ async function SettlementSelector() {
   );
 }
 
-export default function Home() {
-  return (
-    <SessionAuthHelper>
-      <main className="flex h-screen flex-col items-center justify-center">
-        <SettlementSelector />
-      </main>
-    </SessionAuthHelper>
-  );
-}
+export default SettlementSelector;
