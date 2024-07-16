@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getUser, signOut } from "@workos-inc/authkit-nextjs";
-import { Button } from "@/components/ui/button";
 import { UserHeader } from "@/components/user-header";
 
 const fontSans = FontSans({

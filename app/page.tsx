@@ -1,41 +1,7 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Play } from "lucide-react";
-import Link from "next/link";
-import CreateSettlementDialogue from "@/components/createSettlementDialog";
-import { getSettlements } from "@/components/createSettlementDialog/actions";
-
-export type Settlement = {
-  id: string;
-  name: string;
-  limit: number;
-  departing: number;
-  cc: number;
-  year: number;
-};
-
-function SettlementCard({ settlement }: { settlement: Settlement }) {
-  const link = "/" + settlement.id;
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{settlement.name}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="flex flex-row justify-between">
-          <div>Lantern Year: {settlement.year}</div>
-          <div>
-            <Link href={link}>
-              <Button variant="ghost" size="icon">
-                <Play className="h-6 w-6" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
+import { CreateSettlementDialogue } from "@/components/settlements/creationDialog";
+import { getSettlements } from "@/components/settlements/actions";
+import { Settlement } from "@/lib/types/settlements";
+import { SettlementCard } from "@/components/settlements/card";
 
 async function SettlementSelector() {
   const settlements: Array<Settlement> = await getSettlements();

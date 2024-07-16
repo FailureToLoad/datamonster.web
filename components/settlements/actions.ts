@@ -1,20 +1,12 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { z } from "zod";
-import { AddSettlementFields } from "./index";
-import { translateFormError } from "@/lib/forms";
-const addSettlementSchema = z.object({
-  settlementName: z.string().min(2).max(100),
-});
 
-export type Settlement = {
-  id: string;
-  name: string;
-  limit: number;
-  departing: number;
-  cc: number;
-  year: number;
-};
+import { translateFormError } from "@/lib/forms";
+import {
+  AddSettlementFields,
+  AddSettlementSchema,
+  Settlement,
+} from "@/lib/types/settlements";
 
 let settlements: Settlement[] = [
   {
@@ -53,7 +45,7 @@ export const createSettlement = async (data: AddSettlementFields) => {
   try {
     await new Promise((resolve) => setTimeout(resolve, 250));
 
-    const { settlementName } = addSettlementSchema.parse({
+    const { settlementName } = AddSettlementSchema.parse({
       settlementName: data.settlementName,
     });
 
