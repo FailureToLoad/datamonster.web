@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import Link from "next/link";
 import { CreateSettlementDialogue } from "@/app/createSettlementDialog";
-import { SessionAuthHelper } from "@/components/sessionAuthHelper";
 import { getSettlements } from "./actions";
+import { getSignInUrl, getUser } from "@workos-inc/authkit-nextjs";
 
 export type Settlement = {
   id: string;
@@ -60,10 +60,8 @@ async function SettlementSelector() {
 
 export default function Home() {
   return (
-    <SessionAuthHelper>
-      <main className="flex h-screen flex-col items-center justify-center">
-        <SettlementSelector />
-      </main>
-    </SessionAuthHelper>
+    <main className="flex h-screen flex-col items-center justify-center">
+      <SettlementSelector />
+    </main>
   );
 }
