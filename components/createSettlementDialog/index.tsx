@@ -22,7 +22,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFormStatus } from "react-dom";
-import { createSettlement } from "@/app/actions";
+import { createSettlement } from "./actions";
 import { useState } from "react";
 
 const addSettlementSchema = z.object({
@@ -46,7 +46,7 @@ const SubmitButton = ({ label, loading }: SubmitButtonProps) => {
   );
 };
 
-export function CreateSettlementDialogue() {
+export default function CreateSettlementDialogue() {
   const [open, setOpen] = useState(false);
   const onSettlementFormSubmit = async (data: AddSettlementFields) => {
     await createSettlement(data);

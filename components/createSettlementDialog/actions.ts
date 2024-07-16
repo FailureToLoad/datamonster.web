@@ -1,7 +1,7 @@
 "use server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { AddSettlementFields } from "./createSettlementDialog";
+import { AddSettlementFields } from "./index";
 import { translateFormError } from "@/lib/forms";
 const addSettlementSchema = z.object({
   settlementName: z.string().min(2).max(100),

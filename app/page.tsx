@@ -2,9 +2,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import Link from "next/link";
-import { CreateSettlementDialogue } from "@/app/createSettlementDialog";
-import { getSettlements } from "./actions";
-import { getSignInUrl, getUser } from "@workos-inc/authkit-nextjs";
+import CreateSettlementDialogue from "@/components/createSettlementDialog";
+import { getSettlements } from "@/components/createSettlementDialog/actions";
 
 export type Settlement = {
   id: string;
