@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -25,6 +26,7 @@ import { GenderMale, GenderFemale } from "@phosphor-icons/react";
 import { Survivor } from "./types";
 import { CreateSurvivor } from "./actions";
 import { useParams } from "next/navigation";
+import Tally from "@/components/ui/tally";
 
 const formSchema = z.object({
   name: z
@@ -46,7 +48,7 @@ const formSchema = z.object({
   understanding: z.coerce.number().min(0).max(9),
 });
 
-export function NewSurvivorDialogue() {
+export function SurvivorDialogue() {
   const { settlementId } = useParams();
   const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -116,7 +118,7 @@ export function NewSurvivorDialogue() {
                     render={({ field }) => (
                       <FormItem className="border-t-none flex w-5/6 flex-row items-end space-x-3 border-b-2 border-b-slate-300 px-3">
                         <FormLabel>
-                          <span className="font-serif text-xl">Name</span>
+                          <span className="text-xl">Name</span>
                         </FormLabel>
                         <FormMessage />
                         <FormControl>
@@ -155,6 +157,32 @@ export function NewSurvivorDialogue() {
                             </FormItem>
                           </RadioGroup>
                         </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="flex w-full flex-row justify-evenly space-x-4">
+                  <FormField
+                    control={form.control}
+                    name="huntXp"
+                    render={({ field }) => (
+                      <FormItem className="flex w-full flex-row items-center space-x-4">
+                        <FormLabel>
+                          <span className="text-lg">Hunt XP</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Tally
+                            value={field.value}
+                            onChange={field.onChange}
+                            count={16}
+                            color="text-slate-100"
+                            activeColor="text-black"
+                            hoverColor="text-slate-300"
+                            size={40}
+                            edit={field.disabled}
+                          />
+                        </FormControl>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -211,6 +239,56 @@ export function NewSurvivorDialogue() {
                   control={form.control}
                   name="lumi"
                   render={({ field }) => <Stat field={field} label="LUMI" />}
+                />
+              </div>
+              <div className="flex w-full flex-row justify-around">
+                <FormField
+                  control={form.control}
+                  name="courage"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col items-center">
+                      <FormControl>
+                        <Tally
+                          value={field.value}
+                          onChange={field.onChange}
+                          count={9}
+                          color="text-slate-100"
+                          activeColor="text-black"
+                          hoverColor="text-slate-300"
+                          size={40}
+                          edit={field.disabled}
+                        />
+                      </FormControl>
+                      <FormLabel>
+                        <span className="text-lg">Courage</span>
+                      </FormLabel>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="understanding"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col items-center">
+                      <FormControl>
+                        <Tally
+                          value={field.value}
+                          onChange={field.onChange}
+                          count={9}
+                          color="text-slate-100"
+                          activeColor="text-black"
+                          hoverColor="text-slate-300"
+                          size={40}
+                          edit={field.disabled}
+                        />
+                      </FormControl>
+                      <FormLabel>
+                        <span className="text-lg">Understanding</span>
+                      </FormLabel>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
               </div>
             </div>

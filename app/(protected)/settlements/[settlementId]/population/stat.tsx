@@ -31,7 +31,7 @@ const Stat = <
       />
     </FormControl>
     <FormLabel>
-      <span className="font-serif text-lg">{label}</span>
+      <span className="text-lg">{label}</span>
     </FormLabel>
     <FormMessage />
   </FormItem>

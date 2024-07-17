@@ -1,3 +1,4 @@
+"use client";
 import {
   ColumnDef,
   SortingState,
@@ -34,24 +35,19 @@ import {
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
 import { Survivor } from "./types";
-import { NewSurvivorDialogue } from "./survivorSheet";
+import { SurvivorDialogue } from "./survivor-dialog";
+import { getColumns } from "./columns";
 
-interface DataTableProps<Survivor> {
-  columns: ColumnDef<Survivor>[];
+interface SurvivorTableProps<Survivor> {
   data: Array<Survivor>;
 }
 
-function editRow(row: Row<Survivor>) {
-  let thing = row.getValue("name");
-  console.log(thing);
-}
-
-export function DataTable<TData extends Survivor>({
-  columns,
+export function SurvivorTable<TData extends Survivor>({
   data,
-}: DataTableProps<TData>) {
+}: SurvivorTableProps<TData>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const columns = getColumns<TData>()
   const table = useReactTable({
     data,
     columns,
@@ -69,7 +65,7 @@ export function DataTable<TData extends Survivor>({
   return (
     <div>
       <div className="flex items-center py-4">
-        <NewSurvivorDialogue />
+        <SurvivorDialogue />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -178,4 +174,9 @@ export function DataTable<TData extends Survivor>({
       </div>
     </div>
   );
+}
+
+function editRow(row: Row<Survivor>) {
+  let thing = row.getValue("name");
+  console.log(thing);
 }
