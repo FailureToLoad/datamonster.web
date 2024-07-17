@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
-import "./globals.css";
+import "@/app/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { getUser, signOut } from "@workos-inc/authkit-nextjs";
-import { UserHeader } from "@/components/user-header";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -20,7 +18,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { user } = await getUser({ ensureSignedIn: true });
   return (
     <html lang="en">
       <body
@@ -29,10 +26,6 @@ export default async function RootLayout({
           fontSans.variable
         )}
       >
-        <div className="flex flex-row w-full justify-end">
-          <UserHeader />
-        </div>
-
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

@@ -1,10 +1,10 @@
 import { CreateSettlementDialogue } from "@/components/settlements/creationDialog";
-import { getSettlements } from "@/components/settlements/actions";
+import { GetSettlements } from "./actions";
 import { Settlement } from "@/lib/types/settlements";
 import { SettlementCard } from "@/components/settlements/card";
 
 async function SettlementSelector() {
-  const settlements: Array<Settlement> = await getSettlements();
+  const settlements: Array<Settlement> = await GetSettlements();
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden w-full">
@@ -23,7 +23,7 @@ async function SettlementSelector() {
   );
 }
 
-export default function Home() {
+export default function Settlements() {
   return (
     <main className="flex h-screen flex-col items-center justify-center">
       <SettlementSelector />
