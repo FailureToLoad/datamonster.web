@@ -20,33 +20,27 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useFormStatus } from "react-dom";
 import { createSettlement } from "./actions";
-import {
-  AddSettlementFields,
-  AddSettlementSchema,
-} from "@/lib/types/settlements";
-import { useState } from "react";
 
-type SubmitButtonProps = {
-  label: string;
-  loading: React.ReactNode;
-};
+import { useState, useTransition } from "react";
+import { z } from "zod";
 
-const SubmitButton = ({ label, loading }: SubmitButtonProps) => {
-  const { pending } = useFormStatus();
+export const AddSettlementSchema = z.object({
+  settlementName: z.string().min(2).max(100),
+});
 
-  return (
-    <Button disabled={pending} type="submit">
-      {pending ? loading : label}
-    </Button>
-  );
-};
+export type AddSettlementFields = z.infer<typeof AddSettlementSchema>;
 
 export function CreateSettlementDialogue() {
   const [open, setOpen] = useState(false);
+  const [pending, startTransition] = useTransition();
   const onSettlementFormSubmit = async (data: AddSettlementFields) => {
-    await createSettlement(data);
+    startTransition(async () => {
+      const { settlementName } = AddSettlementSchema.parse({
+        settlementName: data.settlementName,
+      });
+      await createSettlement(settlementName);
+    });
     setOpen(false);
   };
   const form = useForm<AddSettlementFields>({
@@ -70,7 +64,7 @@ export function CreateSettlementDialogue() {
         <Form {...form}>
           <form
             className="space-y-8"
-            onSubmit={form.handleSubmit((data) => onSettlementFormSubmit(data))}
+            onSubmit={form.handleSubmit(onSettlementFormSubmit)}
           >
             <DialogHeader>
               <DialogTitle>Add Settlement</DialogTitle>
@@ -90,7 +84,9 @@ export function CreateSettlementDialogue() {
               )}
             />
             <DialogFooter>
-              <SubmitButton label="Create" loading="Creating ..." />
+              <Button disabled={pending} type="submit">
+                Add
+              </Button>
             </DialogFooter>
           </form>
         </Form>

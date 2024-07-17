@@ -1,66 +1,34 @@
 "use server";
 import { revalidatePath } from "next/cache";
-
+import { AddSettlementSchema } from "./creationDialog";
 import { translateFormError } from "@/lib/forms";
-import {
-  AddSettlementFields,
-  AddSettlementSchema,
-  Settlement,
-} from "@/lib/types/settlements";
+import { getUser } from "@workos-inc/authkit-nextjs";
 
-let settlements: Settlement[] = [
-  {
-    id: crypto.randomUUID(),
-    name: "First",
-    limit: 0,
-    departing: 0,
-    cc: 0,
-    year: 0,
-  },
-  {
-    id: crypto.randomUUID(),
-    name: "Second",
-    limit: 0,
-    departing: 0,
-    cc: 0,
-    year: 0,
-  },
-  {
-    id: crypto.randomUUID(),
-    name: "Third",
-    limit: 0,
-    departing: 0,
-    cc: 0,
-    year: 0,
-  },
-];
-
-export const getSettlements = async (): Promise<Settlement[]> => {
-  await new Promise((resolve) => setTimeout(resolve, 250));
-
-  return Promise.resolve(settlements);
+type SettlementCreationRequest = {
+  name: string;
 };
-
-export const createSettlement = async (data: AddSettlementFields) => {
+export const createSettlement = async (settlementName: string) => {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 250));
+    const { accessToken } = await getUser();
 
-    const { settlementName } = AddSettlementSchema.parse({
-      settlementName: data.settlementName,
-    });
-
-    settlements.push({
-      id: crypto.randomUUID(),
+    const request: SettlementCreationRequest = {
       name: settlementName,
-      limit: 0,
-      departing: 0,
-      cc: 0,
-      year: 0,
+    };
+    const response = await fetch(`${process.env.API_HOST}/settlements`, {
+      method: "post",
+      headers: new Headers({
+        Authorization: "Bearer " + accessToken,
+        "Content-Type": "application/json",
+      }),
+      body: JSON.stringify(request),
     });
+    if (!response.ok) {
+      throw new Error("unable to create settlement");
+    }
   } catch (error) {
     return translateFormError(error);
   }
 
-  revalidatePath("/");
+  revalidatePath("/settlements");
   return "Settlement created";
 };
