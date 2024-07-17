@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Settlement } from "@/lib/types/settlements";
 
 export function SettlementCard({ settlement }: { settlement: Settlement }) {
-  const link = "/" + settlement.id;
+  const link = "/settlements/" + settlement.id;
   return (
     <Card>
       <CardHeader>
