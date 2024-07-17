@@ -17,13 +17,13 @@ function Header({ settlement }: HeaderProps) {
             </div>
           </div>
           <div className="inline-flex justify-center">
-            <Link href="timeline" className={navigationMenuTriggerStyle()}>
+            <Link href="timeline/" className={navigationMenuTriggerStyle()}>
               Timeline
             </Link>
-            <Link href="population" className={navigationMenuTriggerStyle()}>
+            <Link href="population/" className={navigationMenuTriggerStyle()}>
               Population
             </Link>
-            <Link href="storage" className={navigationMenuTriggerStyle()}>
+            <Link href="storage/" className={navigationMenuTriggerStyle()}>
               Storage
             </Link>
           </div>

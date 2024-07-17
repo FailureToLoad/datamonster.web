@@ -1,3 +1,11 @@
-export default function SettlementLandingPage() {
-  return <div className="flex flex-1 items-center justify-center">Welcome</div>;
+import { redirect } from "next/navigation";
+
+export default function SettlementLandingPage({
+  params,
+}: {
+  params: {
+    settlementId: string;
+  };
+}) {
+  redirect(`${params.settlementId}/population`);
 }
