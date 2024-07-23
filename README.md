@@ -2,6 +2,12 @@
 
 This originally was part of a mono-repo but after enough experimentation I decided on a structure.
 
+## Related Projects
+
+ [datamonster.api](https://github.com/FailureToLoad/datamonster.api) - The api this site is designed to work against
+ [datamonster.records](https://github.com/FailureToLoad/datamonster.records) - A containerized postgres database the api uses for persistence
+
+
 ## Requirements
 - A managed WorkOS instance
 
