@@ -3,8 +3,6 @@
 This originally was part of a mono-repo but after enough experimentation I decided on a structure.
 
 ## Requirements
-
-- Node 22.2.0
 - A managed WorkOS instance
 
 ## Set Up
