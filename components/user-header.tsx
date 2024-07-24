@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { getUser, signOut } from "@workos-inc/authkit-nextjs";
 import { Label } from "./ui/label";
+import Link from "next/link";
 
 export async function UserHeader() {
   const { user } = await getUser({ ensureSignedIn: true });
@@ -19,6 +20,11 @@ export async function UserHeader() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
+        <DropdownMenuItem>
+          <Label asChild>
+            <Link href="/settlements">Settlements</Link>
+          </Label>
+        </DropdownMenuItem>
         <form
           action={async () => {
             "use server";
