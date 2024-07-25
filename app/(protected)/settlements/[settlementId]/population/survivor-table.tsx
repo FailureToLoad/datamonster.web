@@ -34,7 +34,7 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
-import { Survivor } from "./types";
+import { Survivor } from "@/lib/types/survivor";
 import { SurvivorDialogue } from "./survivor-dialog";
 import { getColumns } from "./columns";
 
@@ -47,7 +47,8 @@ export function SurvivorTable<TData extends Survivor>({
 }: SurvivorTableProps<TData>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  const columns = getColumns<TData>()
+  const [open, setOpen] = useState(false);
+  const columns = getColumns<TData>();
   const table = useReactTable({
     data,
     columns,
@@ -65,7 +66,7 @@ export function SurvivorTable<TData extends Survivor>({
   return (
     <div>
       <div className="flex items-center py-4">
-        <SurvivorDialogue />
+        <SurvivorDialogue open={open} setOpen={setOpen} edit={true} />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -177,6 +178,5 @@ export function SurvivorTable<TData extends Survivor>({
 }
 
 function editRow(row: Row<Survivor>) {
-  let thing = row.getValue("name");
-  console.log(thing);
+  console.log(row.original);
 }

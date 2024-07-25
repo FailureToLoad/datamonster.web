@@ -1,7 +1,28 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Keys, Survivor } from "./types";
+import { Survivor } from "@/lib/types/survivor";
+
+export enum Keys {
+  born = "born",
+  gender = "gender",
+  status = "status",
+  name = "name",
+  xp = "huntXp",
+  survival = "survival",
+  movement = "movement",
+  accuracy = "accuracy",
+  strength = "strength",
+  evasion = "evasion",
+  luck = "luck",
+  speed = "speed",
+  insanity = "insanity",
+  sp = "systemicPressure",
+  torment = "torment",
+  lumi = "lumi",
+  courage = "courage",
+  understanding = "understanding",
+}
 
 export function getColumns<Type>(): ColumnDef<Type>[] {
   const columns: ColumnDef<Type>[] = [
