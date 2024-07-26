@@ -1,6 +1,6 @@
 "use server";
 import { getUser } from "@workos-inc/authkit-nextjs";
-import { Survivor } from "./types";
+import { Survivor } from "@/lib/types/survivor";
 import { revalidatePath } from "next/cache";
 
 export async function FetchSurvivors(settlementId: string) {
