@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/dialog";
 import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { Plus } from "lucide-react";
-import { CreateSurvivor } from "./actions";
-import { useParams } from "next/navigation";
+import { CreateSurvivor } from "@/lib/services/survivor";
+import { useParams, usePathname } from "next/navigation";
 import { SurvivorSheet } from "@/components/survivors/sheet";
 import { Survivor } from "@/lib/types/survivor";
 
@@ -21,6 +21,7 @@ interface DialogueProps {
 
 export function SurvivorDialogue({ open, setOpen }: DialogueProps) {
   const { settlementId } = useParams();
+  const pathname = usePathname();
   const submit = (
     <DialogFooter>
       <Button type="submit">Add</Button>
@@ -28,7 +29,7 @@ export function SurvivorDialogue({ open, setOpen }: DialogueProps) {
   );
 
   const submitAction = async (survivor: Survivor, settlementId: string) => {
-    await CreateSurvivor(survivor, settlementId);
+    await CreateSurvivor(survivor, settlementId, pathname);
     setOpen(false);
   };
 

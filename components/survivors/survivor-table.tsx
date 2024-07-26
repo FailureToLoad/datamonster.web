@@ -1,6 +1,5 @@
 "use client";
 import {
-  ColumnDef,
   SortingState,
   VisibilityState,
   flexRender,
@@ -36,7 +35,7 @@ import {
 } from "@/components/ui/context-menu";
 import { Survivor } from "@/lib/types/survivor";
 import { SurvivorDialogue } from "./survivor-dialog";
-import { getColumns } from "./columns";
+import { getColumns, DefaultColumns } from "./columns";
 
 interface SurvivorTableProps<Survivor> {
   data: Array<Survivor>;
@@ -46,7 +45,8 @@ export function SurvivorTable<TData extends Survivor>({
   data,
 }: SurvivorTableProps<TData>) {
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [columnVisibility, setColumnVisibility] =
+    useState<VisibilityState>(DefaultColumns);
   const [open, setOpen] = useState(false);
   const columns = getColumns<TData>();
   const table = useReactTable({
