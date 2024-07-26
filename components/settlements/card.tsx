@@ -7,7 +7,7 @@ import { Settlement } from "@/lib/types/settlements";
 export function SettlementCard({ settlement }: { settlement: Settlement }) {
   const link = "/settlements/" + settlement.id;
   return (
-    <Card>
+    <Card aria-label={settlement.name}>
       <CardHeader>
         <CardTitle>{settlement.name}</CardTitle>
       </CardHeader>

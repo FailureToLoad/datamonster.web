@@ -51,12 +51,8 @@ export function CreateSettlementDialogue() {
   });
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button
-          variant="outline"
-          className="w-full"
-          aria-label="launch add settlement dialogue"
-        >
+      <DialogTrigger asChild aria-label="Add Settlement">
+        <Button variant="outline" className="w-full">
           <Plus className="h-6 w-6" />
         </Button>
       </DialogTrigger>
@@ -78,7 +74,11 @@ export function CreateSettlementDialogue() {
                 <FormItem>
                   <FormLabel>Settlement Name</FormLabel>
                   <FormControl>
-                    <Input type="text" {...field} />
+                    <Input
+                      aria-label="Enter Settlement Name"
+                      type="text"
+                      {...field}
+                    />
                   </FormControl>
                 </FormItem>
               )}
