@@ -1,5 +1,8 @@
-import { SurvivorTable } from "./survivor-table";
+"use server";
+import { SurvivorTable } from "@/components/survivors/survivor-table";
 import { FetchSurvivors } from "./actions";
+import { Suspense } from "react";
+import { SurvivorTableSkeleton } from "./skeleton";
 
 export default async function PopulationPage({
   params,
@@ -12,7 +15,9 @@ export default async function PopulationPage({
 
   return (
     <div id="population" className="flex flex-1 items-center justify-center">
-      <SurvivorTable data={survivors} />
+      <Suspense fallback={<SurvivorTableSkeleton />}>
+        <SurvivorTable data={survivors} />
+      </Suspense>
     </div>
   );
 }
