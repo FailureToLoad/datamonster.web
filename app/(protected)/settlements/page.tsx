@@ -23,7 +23,7 @@ async function SettlementSelector() {
   );
 }
 
-export default function Settlements() {
+export default function SettlementsPage() {
   return (
     <main className="flex h-screen flex-col items-center justify-center">
       <SettlementSelector />
