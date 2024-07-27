@@ -11,7 +11,6 @@ import {
 
 import { Plus } from "lucide-react";
 import { z } from "zod";
-import { createSettlement } from "./actions";
 import { useForm, Controller, useController } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nextui-org/button";
@@ -27,7 +26,13 @@ export const AddSettlementSchema = z.object(schema);
 
 export type AddSettlementFields = z.infer<typeof AddSettlementSchema>;
 
-export default function AddSettlementModal() {
+export type AddSettlementProps = {
+  createSettlement: (settlementName: string) => Promise<void>;
+};
+
+export default function AddSettlementModal({
+  createSettlement,
+}: AddSettlementProps) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const {
     handleSubmit,

@@ -1,6 +1,6 @@
 "use server";
 import AddSettlementModal from "@/components/settlements/creationModal";
-import { GetSettlements } from "./actions";
+import { GetSettlements, CreateSettlement } from "./actions";
 import { Settlement } from "@/lib/types/settlements";
 import { SettlementCard } from "@/components/settlements/card";
 
@@ -16,7 +16,7 @@ export default async function SettlementsPage() {
             </li>
           ))}
         <li key={-1}>
-          <AddSettlementModal />
+          <AddSettlementModal createSettlement={CreateSettlement} />
         </li>
       </ul>
     </main>
