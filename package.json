@@ -12,6 +12,13 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
+    "@nextui-org/button": "^2.0.37",
+    "@nextui-org/card": "^2.0.33",
+    "@nextui-org/input": "^2.2.4",
+    "@nextui-org/modal": "^2.0.39",
+    "@nextui-org/react": "^2.4.6",
+    "@nextui-org/system": "^2.2.5",
+    "@nextui-org/theme": "^2.2.9",
     "@phosphor-icons/react": "^2.1.7",
     "@radix-ui/react-context-menu": "^2.2.1",
     "@radix-ui/react-dialog": "^1.1.1",
@@ -26,6 +33,7 @@
     "@workos-inc/authkit-nextjs": "^0.8.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.3.18",
     "jwks-rsa": "^3.1.0",
     "lucide-react": "^0.408.0",
     "next": "14.2.5",
@@ -39,8 +47,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@testing-library/react": "^16.0.0",
     "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/node": "^20",
     "@types/react": "^18",
