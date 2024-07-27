@@ -10,8 +10,10 @@ import { Label } from "./ui/label";
 import Link from "next/link";
 
 export async function UserHeader() {
-  const { user } = await getUser({ ensureSignedIn: true });
-
+  const { user } = await getUser();
+  if (!user) {
+    return <></>;
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

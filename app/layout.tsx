@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
-import "@/app/computed.css";
-import { ThemeProvider } from "@/components/theme-provider";
+import "@/styles/globals.css";
+import { Providers } from "@/app/providers";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -19,21 +19,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="system">
       <body
         className={cn(
           "h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
