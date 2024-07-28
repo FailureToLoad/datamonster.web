@@ -1,32 +1,35 @@
-import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
-import { cn } from "@/lib/utils";
-import "@/styles/globals.css";
-import { Providers } from "@/app/providers";
+import type { Metadata, Viewport } from "next";
+import "./global.css";
+import { Providers } from "./providers";
+import clsx from "clsx";
+import { Inter } from "next/font/google";
 
-const fontSans = FontSans({
+export const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
+  display: "swap",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
   title: "Datamonster",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="system">
+    <html lang="en">
       <body
-        className={cn(
+        className={clsx(
           "h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          inter.variable
         )}
       >
-        <Providers>{children}</Providers>
+        <Providers attribute="class" defaultTheme="light">
+          {children}
+        </Providers>
       </body>
     </html>
   );
