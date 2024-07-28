@@ -1,9 +1,7 @@
-// import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import Link from "next/link";
 import { Settlement } from "@/lib/types/settlements";
-import { Card, CardHeader, CardBody } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Button } from "@nextui-org/react";
 
 export function SettlementCard({ settlement }: { settlement: Settlement }) {
   const link = "/settlements/" + settlement.id;
@@ -19,7 +17,7 @@ export function SettlementCard({ settlement }: { settlement: Settlement }) {
           <div>Lantern Year: {settlement.year}</div>
           <div>
             <Link href={link}>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="sm">
                 <Play className="h-6 w-6" />
               </Button>
             </Link>

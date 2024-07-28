@@ -7,14 +7,14 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-} from "@nextui-org/modal";
+  Input,
+  Button,
+} from "@nextui-org/react";
 
 import { Plus } from "lucide-react";
 import { z } from "zod";
 import { useForm, Controller, useController } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@nextui-org/button";
-import { Input } from "@nextui-org/input";
 
 const schema = {
   settlementName: z
