@@ -1,25 +1,35 @@
 import Link from "next/link";
-import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
+import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/react";
+import UserDropdown from "@/components/user-dropdown";
+import { getUser } from "@workos-inc/authkit-nextjs";
 
-function Header() {
+async function Nav() {
+  const { user } = await getUser();
   return (
-    <div id="header" className="sticky top-0 w-full flex-none">
-      <div className="m-2 flex h-20 justify-center">
-        <div className="flex w-1/3 flex-col">
-          <div className="inline-flex justify-center">
-            <Link href="timeline/" className={navigationMenuTriggerStyle()}>
-              Timeline
-            </Link>
-            <Link href="population/" className={navigationMenuTriggerStyle()}>
-              Population
-            </Link>
-            <Link href="storage/" className={navigationMenuTriggerStyle()}>
-              Storage
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Navbar maxWidth="full">
+      <NavbarContent className="hidden sm:flex gap-4 w-screen" justify="center">
+        <NavbarItem>
+          <Link href="timeline/" color="foreground">
+            Timeline
+          </Link>
+        </NavbarItem>
+        <NavbarItem isActive>
+          <Link href="population/" color="foreground">
+            Population
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link href="storage/" color="foreground">
+            Storage
+          </Link>
+        </NavbarItem>
+      </NavbarContent>
+      <NavbarContent justify="end">
+        <NavbarItem>
+          <UserDropdown email={user!.email} />
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
   );
 }
 
@@ -29,9 +39,12 @@ export default async function SettlementLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-screen w-full flex-col">
-      <Header />
-      <div className="p-16">{children}</div>
+    <div>
+      <Nav />
+      <div className="flex h-screen w-full flex-col">
+        <div className="p-16">{children}</div>
+      </div>
     </div>
   );
 }
+<Nav />;
