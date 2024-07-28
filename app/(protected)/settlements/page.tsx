@@ -1,13 +1,13 @@
-import { CreateSettlementDialogue } from "@/components/settlements/creationDialog";
-import { GetSettlements } from "./actions";
+"use server";
+import AddSettlementModal from "@/components/settlements/creationModal";
+import { GetSettlements, CreateSettlement } from "./actions";
 import { Settlement } from "@/lib/types/settlements";
 import { SettlementCard } from "@/components/settlements/card";
 
-async function SettlementSelector() {
+export default async function SettlementsPage() {
   const settlements: Array<Settlement> = await GetSettlements();
-
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden w-full">
+    <main className="flex w-screen h-screen flex-col items-center justify-center overflow-hidden">
       <ul className="w-1/4 space-y-4 ">
         {settlements &&
           settlements.map((settlement) => (
@@ -16,17 +16,9 @@ async function SettlementSelector() {
             </li>
           ))}
         <li key={-1}>
-          <CreateSettlementDialogue />
+          <AddSettlementModal createSettlement={CreateSettlement} />
         </li>
       </ul>
-    </div>
-  );
-}
-
-export default function Settlements() {
-  return (
-    <main className="flex h-screen flex-col items-center justify-center">
-      <SettlementSelector />
     </main>
   );
 }
