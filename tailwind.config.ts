@@ -67,7 +67,6 @@ module.exports = {
             },
             focus: "#4433FF",
           },
-          // ... rest of the colors
         },
       },
     }),
