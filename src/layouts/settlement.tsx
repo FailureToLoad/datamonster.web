@@ -1,30 +1,25 @@
-import { UserButton, useUser } from "@clerk/clerk-react";
-import { Navbar, NavbarContent, NavbarItem, Spinner } from "@nextui-org/react";
-import { Link, Outlet } from "react-router-dom";
+import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/react";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 function Nav() {
+  const { pathname } = useLocation();
   return (
     <Navbar maxWidth="full">
-      <NavbarContent className="hidden sm:flex gap-4 w-screen" justify="center">
-        <NavbarItem>
-          <Link to="timeline/" color="foreground">
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        <NavbarItem isActive={pathname.includes("timeline")}>
+          <Link to="timeline" color="foreground">
             Timeline
           </Link>
         </NavbarItem>
-        <NavbarItem isActive>
-          <Link to="population/" color="foreground">
+        <NavbarItem isActive={pathname.includes("population")}>
+          <Link to="population" color="foreground">
             Population
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link to="storage/" color="foreground">
+        <NavbarItem isActive={pathname.includes("storage")}>
+          <Link to="storage" color="foreground">
             Storage
           </Link>
-        </NavbarItem>
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem>
-          <UserButton />
         </NavbarItem>
       </NavbarContent>
     </Navbar>
@@ -32,11 +27,6 @@ function Nav() {
 }
 
 export default function SettlementLayout() {
-  const { isLoaded } = useUser();
-  if (!isLoaded) {
-    return <Spinner />;
-  }
-
   return (
     <div>
       <Nav />
