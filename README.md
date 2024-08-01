@@ -18,7 +18,7 @@ A website for managing Kingdom Death: Monster campaigns.
 
 
 ## Requirements
-- A managed [Clerk](https://clerk.com/) instance for authentication.
+A managed [Clerk](https://clerk.com/) instance for authentication.  
 
 ## Set Up
 
