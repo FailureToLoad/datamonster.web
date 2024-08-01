@@ -3,12 +3,12 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { NextUIProvider } from "@nextui-org/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import RootLayout from "@/layouts/root.tsx";
+import RootLayout from "@/components/root-layout";
 
 import IndexPage from "@/routes";
 import SignInPage from "@/routes/signin";
 import SignUpPage from "@/routes/signup";
-import ProtectedLayout from "@/layouts/protected.tsx";
+import ProtectedLayout from "@/components/protected-layout";
 import SettlementsPage from "@/routes/settlements/index.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import StorageTab from "@/routes/settlement/settlementStorage.tsx";
