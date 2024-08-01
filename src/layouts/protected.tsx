@@ -7,8 +7,6 @@ export default function ProtectedLayout() {
   const { userId, isLoaded } = useAuth();
   const navigate = useNavigate();
 
-  console.log("test", userId);
-
   if (isLoaded && !userId) {
     navigate("/sign-in");
   }
