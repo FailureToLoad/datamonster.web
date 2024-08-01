@@ -1,24 +1,27 @@
 # Datamonster.web
 
-This originally was part of a mono-repo but after enough experimentation I decided on a structure.
+A website for managing Kingdom Death: Monster campaigns.
+
+## Notable frameworks
+
+- [Vite configured for React with Typescript and SWC](https://vitejs.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Tanstack Query](https://tanstack.com/query/latest/docs/framework/react/overview)
+- [NextUI](https://nextui.org/)
+- [Vitest with jsdom](https://vitest.dev/)
+- [React Router](https://reactrouter.com/en/main)
 
 ## Related Projects
 
- [datamonster.api](https://github.com/FailureToLoad/datamonster.api) - The api this site is designed to work against  
- [datamonster.records](https://github.com/FailureToLoad/datamonster.records) - A containerized postgres database the api uses for persistence  
+ [datamonster.api](https://github.com/FailureToLoad/datamonster.api) - The api this site is designed to work against.
+ [datamonster.records](https://github.com/FailureToLoad/datamonster.records) - A containerized postgres database the api uses for persistence.
 
 
 ## Requirements
-- A managed WorkOS instance
+- A managed [Clerk](https://clerk.com/) instance for authentication.
 
 ## Set Up
 
-- Create your own .env.local file by using the .env.local.example file as a base.
-  - `WORKOS_COOKIE_PASSWORD` is the only one you have to generate manually.
-  - I used openSSL for mine `openssl rand -base64 24`
-
-## Structure
-
-The `app` directory handles all of our client and server routes.  
-The `components` directory contains all of our reusable components.  
-The `lib` directory is for reusable functions and types. Other projects might name this one `utils`.  
+- Create your own .env.local file by using the env.local.example file as a base.
+- Clone, set up, build, and run [datamonster.records](https://github.com/FailureToLoad/datamonster.records).
+- Clone, set up, build and run [datamonster.api](https://github.com/FailureToLoad/datamonster.api).
