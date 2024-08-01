@@ -6,7 +6,7 @@ function Nav() {
   const { pathname } = useLocation();
   return (
     <Navbar maxWidth="full">
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="gap-4 w-full" justify="center">
         <NavbarItem isActive={pathname.includes("timeline")}>
           <Link to="timeline" color="foreground">
             Timeline
@@ -32,7 +32,7 @@ function Nav() {
   );
 }
 
-export default function SettlementLayout() {
+export default function SettlementPage() {
   return (
     <div className="w-screen">
       <Nav />

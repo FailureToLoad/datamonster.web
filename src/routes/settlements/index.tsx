@@ -2,9 +2,9 @@ import AddSettlementModal from "@/routes/settlements/creationModal";
 import { GetSettlements, CreateSettlement } from "@/lib/services/settlement";
 import { SettlementCard } from "@/routes/settlements/card";
 import { useAuth } from "@clerk/clerk-react";
-import { Spinner } from "@nextui-org/react";
 import { Settlement } from "@/lib/types/settlements";
 import { useQuery } from "@tanstack/react-query";
+import { Spinner } from "@nextui-org/react";
 
 export const SettlementsQueryKey = "settlements";
 export default function SettlementsPage() {

@@ -11,10 +11,10 @@ import SignUpPage from "@/routes/signup";
 import ProtectedLayout from "@/layouts/protected.tsx";
 import SettlementsPage from "@/routes/settlements/index.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import SettlementLayout from "@/layouts/settlement.tsx";
 import StorageTab from "@/routes/settlement/settlementStorage.tsx";
-import TimelineTab from "./routes/settlement/timeline.tsx";
-import PopulationTab from "./routes/settlement/population.tsx";
+import TimelineTab from "@/routes/settlement/timeline.tsx";
+import PopulationTab from "@/routes/settlement/population";
+import SettlementPage from "@/routes/settlement/index.tsx";
 
 const queryClient = new QueryClient();
 
@@ -35,10 +35,13 @@ const router = createBrowserRouter([
       {
         element: <ProtectedLayout />,
         children: [
-          { path: "/settlements", element: <SettlementsPage /> },
+          {
+            path: "/settlements",
+            element: <SettlementsPage />,
+          },
           {
             path: "/settlements/:settlementId",
-            element: <SettlementLayout />,
+            element: <SettlementPage />,
             children: [
               { path: "population", element: <PopulationTab /> },
               { path: "storage", element: <StorageTab /> },
@@ -58,5 +61,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <RouterProvider router={router} />
       </NextUIProvider>
     </QueryClientProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
