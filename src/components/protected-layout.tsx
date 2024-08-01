@@ -14,7 +14,7 @@ export default function ProtectedLayout() {
   if (!isLoaded) return <Spinner />;
 
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center">
+    <div className="flex h-screen flex-col items-center justify-center">
       <Outlet />;
     </div>
   );

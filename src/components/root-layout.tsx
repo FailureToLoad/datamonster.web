@@ -17,7 +17,7 @@ export default function RootLayout() {
       routerReplace={(to) => navigate(to, { replace: true })}
       publishableKey={PUBLISHABLE_KEY}
     >
-      <div className="flex h-screen w-screen flex-col items-center justify-center">
+      <div className="flex h-screen flex-col items-center justify-center">
         <ClerkLoading>
           <Spinner />
         </ClerkLoading>
