@@ -1,3 +1,4 @@
+import { UserButton } from "@clerk/clerk-react";
 import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
@@ -22,15 +23,20 @@ function Nav() {
           </Link>
         </NavbarItem>
       </NavbarContent>
+      <NavbarContent justify="end">
+        <NavbarItem>
+          <UserButton />
+        </NavbarItem>
+      </NavbarContent>
     </Navbar>
   );
 }
 
 export default function SettlementLayout() {
   return (
-    <div>
+    <div className="w-screen">
       <Nav />
-      <div className="flex h-screen w-full flex-col">
+      <div className="flex h-screen flex-col">
         <div className="p-16">
           <Outlet />
         </div>
