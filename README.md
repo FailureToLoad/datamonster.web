@@ -13,8 +13,8 @@ A website for managing Kingdom Death: Monster campaigns.
 
 ## Related Projects
 
- [datamonster.api](https://github.com/FailureToLoad/datamonster.api) - The api this site is designed to work against.
- [datamonster.records](https://github.com/FailureToLoad/datamonster.records) - A containerized postgres database the api uses for persistence.
+ [datamonster.api](https://github.com/FailureToLoad/datamonster.api) - The api this site is designed to work against.  
+ [datamonster.records](https://github.com/FailureToLoad/datamonster.records) - A containerized postgres database the api uses for persistence.  
 
 
 ## Requirements
