@@ -13,6 +13,9 @@ import { Plus } from "lucide-react";
 import { z } from "zod";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAuth } from "@clerk/clerk-react";
+import { useQueryClient } from "@tanstack/react-query";
+import { SettlementsQueryKey } from ".";
 
 const schema = {
   settlementName: z
@@ -25,12 +28,17 @@ export const AddSettlementSchema = z.object(schema);
 export type AddSettlementFields = z.infer<typeof AddSettlementSchema>;
 
 export type AddSettlementProps = {
-  createSettlement: (settlementName: string) => Promise<void>;
+  createSettlement: (
+    settlementName: string,
+    accessToken: string
+  ) => Promise<void>;
 };
 
 export default function AddSettlementModal({
   createSettlement,
 }: AddSettlementProps) {
+  const { getToken } = useAuth();
+  const queryClient = useQueryClient();
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const { handleSubmit, control } = useForm<AddSettlementFields>({
     resolver: zodResolver(AddSettlementSchema),
@@ -39,13 +47,16 @@ export default function AddSettlementModal({
     },
   });
   const submitForm = async (data: AddSettlementFields) => {
-    async () => {
-      const { settlementName } = AddSettlementSchema.parse({
-        settlementName: data.settlementName,
-      });
-      await createSettlement(settlementName);
-      onClose();
-    };
+    const token = await getToken();
+    if (token === null || token === "") {
+      throw Error("invalid token");
+    }
+    const { settlementName } = AddSettlementSchema.parse({
+      settlementName: data.settlementName,
+    });
+    await createSettlement(settlementName, token);
+    queryClient.invalidateQueries({ queryKey: [SettlementsQueryKey] });
+    onClose();
   };
 
   const validator = (key: keyof typeof schema) => (value: string) => {

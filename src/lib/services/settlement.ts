@@ -4,20 +4,25 @@ import { Settlement } from "@/lib/types/settlements";
 type SettlementCreationRequest = {
   name: string;
 };
-export const CreateSettlement = async (settlementName: string) => {
+export const CreateSettlement = async (
+  settlementName: string,
+  accessToken: string
+) => {
   try {
-    const accessToken = "";
     const request: SettlementCreationRequest = {
       name: settlementName,
     };
-    const response = await fetch(`${import.meta.env.VITE_API_HOST}/settlements`, {
-      method: "post",
-      headers: new Headers({
-        Authorization: "Bearer " + accessToken,
-        "Content-Type": "application/json",
-      }),
-      body: JSON.stringify(request),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_HOST}/settlements`,
+      {
+        method: "post",
+        headers: new Headers({
+          Authorization: "Bearer " + accessToken,
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify(request),
+      }
+    );
     if (!response.ok) {
       throw new Error("unable to create settlement");
     }

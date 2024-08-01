@@ -1,11 +1,12 @@
-import AddSettlementModal from "@/components/settlements/creationModal";
+import AddSettlementModal from "@/routes/settlements/creationModal";
 import { GetSettlements, CreateSettlement } from "@/lib/services/settlement";
-import { SettlementCard } from "@/components/settlements/card";
+import { SettlementCard } from "@/routes/settlements/card";
 import { useAuth } from "@clerk/clerk-react";
 import { Spinner } from "@nextui-org/react";
 import { Settlement } from "@/lib/types/settlements";
 import { useQuery } from "@tanstack/react-query";
 
+export const SettlementsQueryKey = "settlements";
 export default function SettlementsPage() {
   const { getToken } = useAuth();
   const getSettlements = async () => {
@@ -23,7 +24,7 @@ export default function SettlementsPage() {
   };
 
   const { isPending, isError, data, error } = useQuery({
-    queryKey: ["settlements"],
+    queryKey: [SettlementsQueryKey],
     queryFn: getSettlements,
   });
 

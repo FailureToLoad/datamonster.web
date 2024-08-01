@@ -9,7 +9,7 @@ import IndexPage from "@/routes";
 import SignInPage from "@/routes/signin";
 import SignUpPage from "@/routes/signup";
 import ProtectedLayout from "@/layouts/protected.tsx";
-import SettlementsPage from "@/routes/settlementList.tsx";
+import SettlementsPage from "@/routes/settlements/index.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SettlementLayout from "@/layouts/settlement.tsx";
 import StorageTab from "@/routes/settlement/settlementStorage.tsx";
@@ -58,5 +58,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <RouterProvider router={router} />
       </NextUIProvider>
     </QueryClientProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
