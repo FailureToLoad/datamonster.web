@@ -5,7 +5,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 function Nav() {
   const { pathname } = useLocation();
   return (
-    <Navbar maxWidth="full">
+    <Navbar maxWidth="full" className="w-screen">
       <NavbarContent className="gap-4 w-full" justify="center">
         <NavbarItem isActive={pathname.includes("timeline")}>
           <Link to="timeline" color="foreground">
@@ -34,10 +34,10 @@ function Nav() {
 
 export default function SettlementPage() {
   return (
-    <div className="w-screen">
+    <div>
       <Nav />
       <div className="flex h-screen flex-col">
-        <div className="p-16">
+        <div className="p-16 flex flex-1 justify-center">
           <Outlet />
         </div>
       </div>
