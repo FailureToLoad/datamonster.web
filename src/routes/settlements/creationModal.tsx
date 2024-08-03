@@ -1,31 +1,34 @@
+import { Button } from "@/components/ui/button";
 import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-  Input,
-  Button,
-} from "@nextui-org/react";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  Form,
+} from "@/components/ui/form";
 
 import { Plus } from "lucide-react";
 import { z } from "zod";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "@clerk/clerk-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { SettlementsQueryKey } from ".";
+import { useState } from "react";
 
-const schema = {
-  settlementName: z
-    .string()
-    .min(1, "Settlement name is too short")
-    .max(25, "Settlement name is too long"),
-};
-export const AddSettlementSchema = z.object(schema);
-
-export type AddSettlementFields = z.infer<typeof AddSettlementSchema>;
+const formSchema = z.object({
+  settlementName: z.string().min(2).max(100),
+});
 
 export type AddSettlementProps = {
   createSettlement: (
@@ -37,88 +40,67 @@ export type AddSettlementProps = {
 export default function AddSettlementModal({
   createSettlement,
 }: AddSettlementProps) {
+  const [open, setOpen] = useState(false);
   const { getToken } = useAuth();
   const queryClient = useQueryClient();
-  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-  const { handleSubmit, control } = useForm<AddSettlementFields>({
-    resolver: zodResolver(AddSettlementSchema),
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       settlementName: "",
     },
   });
-  const submitForm = async (data: AddSettlementFields) => {
-    const token = await getToken();
-    if (token === null || token === "") {
-      throw Error("invalid token");
+  const submitForm = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const token = await getToken();
+      if (token === null || token === "") {
+        throw Error("invalid token");
+      }
+      const settlementName = values.settlementName;
+      await createSettlement(settlementName, token);
+      queryClient.invalidateQueries({ queryKey: [SettlementsQueryKey] });
+      setOpen(false);
+    } catch (error) {
+      console.log(error);
     }
-    const { settlementName } = AddSettlementSchema.parse({
-      settlementName: data.settlementName,
-    });
-    await createSettlement(settlementName, token);
-    queryClient.invalidateQueries({ queryKey: [SettlementsQueryKey] });
-    onClose();
-  };
-
-  const validator = (key: keyof typeof schema) => (value: string) => {
-    const res = schema[key].safeParse(value);
-    return (!res.success && res.error.issues[0].message) || null;
   };
 
   return (
-    <>
-      <Button
-        aria-label="Add Settlement"
-        color="secondary"
-        className="w-full"
-        onPress={onOpen}
-      >
-        <Plus className="h-6 w-6" />
-      </Button>
-      <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        placement="top-center"
-        data-testid="settlement-modal"
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <form onSubmit={handleSubmit(submitForm)}>
-                <ModalHeader className="flex flex-col gap-1">
-                  Create Settlement
-                </ModalHeader>
-                <ModalBody data-testid="create-settlement-content">
-                  <Controller
-                    name="settlementName"
-                    rules={{
-                      required: true,
-                    }}
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        autoFocus
-                        aria-label="Settlement Name"
-                        label="Settlement Name"
-                        value={field.value}
-                        onChange={field.onChange}
-                        validate={validator("settlementName")}
-                      />
-                    )}
-                  />
-                </ModalBody>
-                <ModalFooter>
-                  <Button color="danger" variant="flat" onPress={onClose}>
-                    Close
-                  </Button>
-                  <Button color="primary" type="submit">
-                    Add
-                  </Button>
-                </ModalFooter>
-              </form>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button
+          variant="outline"
+          className="w-full"
+          aria-label="launch add settlement dialogue"
+        >
+          <Plus className="h-6 w-6" />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <Form {...form}>
+          <form className="space-y-8" onSubmit={form.handleSubmit(submitForm)}>
+            <DialogHeader>
+              <DialogTitle>Add Settlement</DialogTitle>
+              <DialogDescription>Enter settlement details.</DialogDescription>
+            </DialogHeader>
+
+            <FormField
+              control={form.control}
+              name="settlementName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Settlement Name</FormLabel>
+                  <FormControl>
+                    <Input type="text" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <DialogFooter>
+              <Button type="submit">Add</Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 }
