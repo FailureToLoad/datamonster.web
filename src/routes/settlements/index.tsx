@@ -4,7 +4,7 @@ import { SettlementCard } from "@/routes/settlements/card";
 import { useAuth } from "@clerk/clerk-react";
 import { Settlement } from "@/lib/types/settlements";
 import { useQuery } from "@tanstack/react-query";
-import { Spinner } from "@nextui-org/react";
+import Spinner from "@/components/spinner";
 
 export const SettlementsQueryKey = "settlements";
 export default function SettlementsPage() {

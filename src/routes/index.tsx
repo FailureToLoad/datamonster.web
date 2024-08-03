@@ -1,5 +1,5 @@
 import { useUser, SignInButton } from "@clerk/clerk-react";
-import { Spinner } from "@nextui-org/react";
+import Spinner from "@/components/spinner";
 import { Navigate } from "react-router-dom";
 
 export default function Home() {

@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { ClerkLoaded, ClerkLoading, ClerkProvider } from "@clerk/clerk-react";
-import { Spinner } from "@nextui-org/react";
+import Spinner from "@/components/spinner";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 

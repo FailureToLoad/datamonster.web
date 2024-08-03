@@ -3,11 +3,11 @@ import {
   TableHeader,
   TableColumn,
   TableBody,
-  Spinner,
   TableRow,
   TableCell,
   getKeyValue,
 } from "@nextui-org/react";
+import Spinner from "@/components/spinner";
 import NewSurvivorModal from "./newSurvivorModal";
 import { Survivor } from "@/lib/types/survivor";
 import { useQuery } from "@tanstack/react-query";
@@ -100,7 +100,7 @@ export default function SurvivorTable() {
         emptyContent={"No rows to display."}
         items={population}
         isLoading={isPending}
-        loadingContent={<Spinner label="Loading..." />}
+        loadingContent={<Spinner />}
       >
         {(item) => (
           <TableRow key={item.name}>

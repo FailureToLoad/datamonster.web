@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAuth } from "@clerk/clerk-react";
-import { Spinner } from "@nextui-org/react";
+import Spinner from "@/components/spinner";
 import { Outlet, useNavigate } from "react-router-dom";
 
 export default function ProtectedLayout() {
