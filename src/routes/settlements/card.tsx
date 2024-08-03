@@ -1,29 +1,28 @@
-import { Play } from "lucide-react";
+import { Play } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
-import { Card, CardHeader, CardBody, Button } from "@nextui-org/react";
-import { Settlement } from "../../lib/types/settlements";
+import { Settlement } from "@/lib/types/settlements";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export function SettlementCard({ settlement }: { settlement: Settlement }) {
   const link = "/settlements/" + settlement.id;
   return (
     <Card>
-      <CardHeader aria-label={settlement.name}>
-        <div className="flex flex-col">
-          <p className="text-md">{settlement.name}</p>
-        </div>
+      <CardHeader>
+        <CardTitle>{settlement.name}</CardTitle>
       </CardHeader>
-      <CardBody>
+      <CardContent>
         <div className="flex flex-row justify-between">
           <div>Lantern Year: {settlement.year}</div>
           <div>
             <Link to={link}>
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="icon">
                 <Play className="h-6 w-6" />
               </Button>
             </Link>
           </div>
         </div>
-      </CardBody>
+      </CardContent>
     </Card>
   );
 }
