@@ -2,7 +2,10 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
+  DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { NakedInput } from "@/components/ui/nakedInput";
@@ -29,6 +32,7 @@ import { PopulationQueryKey } from ".";
 import { CreateSurvivor } from "@/lib/services/survivor";
 import { useQueryClient } from "@tanstack/react-query";
 import Tally from "@/components/ui/tally";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 const formSchema = z.object({
   name: z
@@ -112,6 +116,13 @@ export function NewSurvivorDialogue() {
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-screen max-w-fit">
+        <VisuallyHidden>
+          <DialogHeader>
+            <DialogTitle>Add Survivor</DialogTitle>
+            <DialogDescription>Create a new survivor.</DialogDescription>
+          </DialogHeader>
+        </VisuallyHidden>
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className="grid grid-cols-6 gap-4">
