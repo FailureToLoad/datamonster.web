@@ -51,7 +51,17 @@ export function DataTable<TData extends Survivor>({
   data,
 }: DataTableProps<TData>) {
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
+    born: false,
+    status: false,
+    survival: false,
+    insanity: false,
+    systemicPressure: false,
+    torment: false,
+    lumi: false,
+    courage: false,
+    understanding: false,
+  });
   const table = useReactTable({
     data,
     columns,
