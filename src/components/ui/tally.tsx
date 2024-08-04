@@ -35,6 +35,7 @@ const Tally = ({
   fill = true,
   Icon = <Square />,
   variant = "default",
+  className: customClassName,
   onTallyChange,
   ...props
 }: RatingsProps) => {
@@ -75,11 +76,11 @@ const Tally = ({
 
   return (
     <div
-      className={cn("flex w-fit items-center gap-2 ")}
+      className={cn("flex items-center gap-2", customClassName)}
       onMouseLeave={handleMouseLeave}
       {...props}
     >
-      <div className="flex items-center" onMouseEnter={handleMouseEnter}>
+      <div className="w-full flex items-center" onMouseEnter={handleMouseEnter}>
         {[...Array(fullBoxes)].map((_, i) =>
           React.cloneElement(Icon, {
             key: i,

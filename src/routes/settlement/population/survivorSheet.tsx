@@ -2,10 +2,7 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { NakedInput } from "@/components/ui/nakedInput";
@@ -115,10 +112,6 @@ export function NewSurvivorDialogue() {
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-screen max-w-fit">
-        <DialogHeader>
-          <DialogTitle>Add Survivor</DialogTitle>
-          <DialogDescription>Create a new survivor.</DialogDescription>
-        </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className="grid grid-cols-6 gap-4">
@@ -128,7 +121,7 @@ export function NewSurvivorDialogue() {
                 render={({ field }) => (
                   <FormItem className="border-t-none col-span-5 flex flex-row items-end space-x-3 border-b-2 border-b-slate-300 px-3">
                     <FormLabel>
-                      <span className="font-serif text-xl">Name</span>
+                      <span className="font-inter text-lg">Name</span>
                     </FormLabel>
                     <FormMessage />
                     <FormControl>
@@ -175,11 +168,20 @@ export function NewSurvivorDialogue() {
                   control={form.control}
                   name="huntXp"
                   render={({ field }) => (
-                    <Tally
-                      rating={field.value}
-                      max={16}
-                      onTallyChange={field.onChange}
-                    />
+                    <FormItem className="flex flex-row space-x-3 px-3">
+                      <FormLabel className="min-w-fit self-center">
+                        <span className="font-inter text-lg">Hunt XP</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Tally
+                          rating={field.value}
+                          max={16}
+                          onTallyChange={field.onChange}
+                          className="w-full"
+                          size={30}
+                        />
+                      </FormControl>
+                    </FormItem>
                   )}
                 />
               </div>
