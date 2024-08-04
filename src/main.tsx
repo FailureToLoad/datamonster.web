@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { NextUIProvider } from "@nextui-org/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "@/components/root-layout";
 
@@ -16,6 +15,7 @@ import TimelineTab from "@/routes/settlement/timeline.tsx";
 import PopulationTab from "@/routes/settlement/population";
 import SettlementPage from "@/routes/settlement/index.tsx";
 import ErrorBoundary from "@/components/error-boundary";
+import ErrorPage from "./components/error";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +29,7 @@ if (!PUBLISHABLE_KEY) {
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       { path: "/", element: <IndexPage /> },
       { path: "/signin/*", element: <SignInPage /> },
@@ -59,9 +60,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <NextUIProvider>
-          <RouterProvider router={router} />
-        </NextUIProvider>
+        <RouterProvider router={router} />
       </QueryClientProvider>
     </ErrorBoundary>
   </React.StrictMode>
