@@ -22,12 +22,12 @@ const Stat = <
   field,
   label,
 }: StatProps<TFieldValues, TName>) => (
-  <FormItem className="flex w-32 flex-col items-center">
+  <FormItem className="flex w-20 flex-col items-center">
     <FormControl>
       <NakedInput
         type="number"
         {...field}
-        className="h-20 rounded-lg border-2 border-slate-300 px-0 py-3 text-xl"
+        className="h-20 rounded-lg border-2 border-slate-300 px-0  text-lg"
       />
     </FormControl>
     <FormLabel>
