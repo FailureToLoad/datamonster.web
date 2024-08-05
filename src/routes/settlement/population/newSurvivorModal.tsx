@@ -106,7 +106,7 @@ export default function NewSurvivorModal() {
       <Button
         isIconOnly
         aria-label="Add Settlement"
-        color="secondary"
+        color="primary"
         onPress={onOpen}
       >
         <Plus className="size-4" />
@@ -311,7 +311,7 @@ export default function NewSurvivorModal() {
                   <Button color="danger" variant="flat" onPress={onClose}>
                     Close
                   </Button>
-                  <Button color="primary" type="submit">
+                  <Button className="bg-primary" type="submit">
                     Add
                   </Button>
                 </ModalFooter>

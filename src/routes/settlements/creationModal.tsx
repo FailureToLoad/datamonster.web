@@ -68,7 +68,7 @@ export default function AddSettlementModal({
     <>
       <Button
         aria-label="Add Settlement"
-        color="secondary"
+        color="primary"
         className="w-full"
         onPress={onOpen}
       >

@@ -1,3 +1,4 @@
+import { Code } from "@nextui-org/react";
 import { Link, useRouteError, isRouteErrorResponse } from "react-router-dom";
 
 const ErrorPage = () => {
@@ -11,6 +12,9 @@ const ErrorPage = () => {
         </h1>
         <p className="text-neutral-grayish-blue my-10 text-4xl">
           {error.statusText}
+        </p>
+        <p>
+          <Code>{error.data}</Code>
         </p>
         <Link
           to={"/welcome"}
@@ -30,6 +34,9 @@ const ErrorPage = () => {
               (error as { statusText?: string })?.statusText}
           </i>
         </p>
+        <div className="size-1/2 w-1/2 text-wrap">
+          <Code size="md">{(error as Error).stack}</Code>
+        </div>
         <Link
           to={"/welcome"}
           className="bg-neutral-dark-blue text-neutral-white rounded-md p-2"

@@ -15,6 +15,7 @@ import StorageTab from "@/routes/settlement/settlementStorage.tsx";
 import TimelineTab from "@/routes/settlement/timeline.tsx";
 import PopulationTab from "@/routes/settlement/population";
 import SettlementPage from "@/routes/settlement/index.tsx";
+import ErrorPage from "./components/error";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ if (!PUBLISHABLE_KEY) {
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       { path: "/", element: <IndexPage /> },
       { path: "/signin/*", element: <SignInPage /> },
