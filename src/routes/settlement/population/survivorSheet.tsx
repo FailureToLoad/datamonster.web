@@ -24,15 +24,15 @@ import { useState } from "react";
 import { Plus } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import Stat from "./stat";
 import { GenderMale, GenderFemale } from "@phosphor-icons/react";
 import { useAuth } from "@clerk/clerk-react";
 import { Survivor } from "@/lib/types/survivor";
 import { PopulationQueryKey } from ".";
 import { CreateSurvivor } from "@/lib/services/survivor";
 import { useQueryClient } from "@tanstack/react-query";
-import Tally from "@/components/ui/tally";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import Tally from "@/components/ui/tally";
+import Stat from "./stat";
 
 const formSchema = z.object({
   name: z
@@ -41,17 +41,12 @@ const formSchema = z.object({
     .max(50, { message: "Name cannot be longer than 50 characters" }),
   gender: z.enum(["M", "F"]),
   huntXp: z.coerce.number().min(0).max(16),
-  survival: z.coerce.number().min(0).max(30),
-  insanity: z.coerce.number().min(0).max(1000),
   movement: z.coerce.number().min(0).max(15),
   accuracy: z.coerce.number().min(-10).max(15),
   strength: z.coerce.number().min(-10).max(15),
   evasion: z.coerce.number().min(-10).max(15),
   luck: z.coerce.number().min(-10).max(15),
   speed: z.coerce.number().min(-10).max(15),
-  lumi: z.coerce.number().min(0).max(50),
-  courage: z.coerce.number().min(0).max(9),
-  understanding: z.coerce.number().min(0).max(9),
 });
 
 export function NewSurvivorDialogue() {
@@ -82,31 +77,35 @@ export function NewSurvivorDialogue() {
     if (!settlementId || settlementId === "") {
       throw Error("settlementId is required");
     }
-    const newbie: Survivor = {
-      name: values.name,
-      born: 1,
-      gender: values.gender,
-      status: "alive",
-      id: 0,
-      settlement: Number(settlementId),
-      huntXp: values.huntXp,
-      survival: 1,
-      movement: values.movement,
-      accuracy: values.accuracy,
-      strength: values.strength,
-      evasion: values.evasion,
-      luck: values.luck,
-      speed: values.speed,
-      insanity: 0,
-      systemicPressure: 0,
-      torment: 0,
-      lumi: 0,
-      courage: 0,
-      understanding: 0,
-    };
-    await CreateSurvivor(newbie, settlementId, token);
-    queryClient.invalidateQueries({ queryKey: [PopulationQueryKey] });
-    setOpen(false);
+    try {
+      const newbie: Survivor = {
+        name: values.name,
+        born: 1,
+        gender: values.gender,
+        status: "alive",
+        id: 0,
+        settlement: Number(settlementId),
+        huntXp: values.huntXp,
+        survival: 1,
+        movement: values.movement,
+        accuracy: values.accuracy,
+        strength: values.strength,
+        evasion: values.evasion,
+        luck: values.luck,
+        speed: values.speed,
+        insanity: 0,
+        systemicPressure: 0,
+        torment: 0,
+        lumi: 0,
+        courage: 0,
+        understanding: 0,
+      };
+      await CreateSurvivor(newbie, settlementId, token);
+      queryClient.invalidateQueries({ queryKey: [PopulationQueryKey] });
+      setOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -138,6 +137,7 @@ export function NewSurvivorDialogue() {
                     <FormControl>
                       <NakedInput type="text" {...field} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -171,6 +171,7 @@ export function NewSurvivorDialogue() {
                         </FormItem>
                       </RadioGroup>
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -227,8 +228,10 @@ export function NewSurvivorDialogue() {
                 render={({ field }) => <Stat field={field} label="SPD" />}
               />
             </div>
-            <DialogFooter>
-              <Button type="submit">Add</Button>
+            <DialogFooter className="pt-4">
+              <Button type="submit" onClick={form.handleSubmit(onSubmit)}>
+                Add
+              </Button>
             </DialogFooter>
           </form>
         </Form>
