@@ -104,12 +104,12 @@ export default function NewSurvivorModal() {
   return (
     <>
       <Button
+        isIconOnly
         aria-label="Add Settlement"
         color="secondary"
-        className="max-w-fit"
         onPress={onOpen}
       >
-        <Plus className="h-6 w-6" />
+        <Plus className="size-4" />
       </Button>
       <Modal
         isOpen={isOpen}
