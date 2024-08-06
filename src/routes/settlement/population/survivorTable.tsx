@@ -95,6 +95,12 @@ export default function SurvivorTable() {
         <TableColumn key="speed" align="center">
           Speed
         </TableColumn>
+        <TableColumn key="courage" align="center">
+          Courage
+        </TableColumn>
+        <TableColumn key="understanding" align="center">
+          Understanding
+        </TableColumn>
       </TableHeader>
       <TableBody
         emptyContent={"No rows to display."}

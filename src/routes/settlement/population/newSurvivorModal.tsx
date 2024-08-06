@@ -36,6 +36,8 @@ const schema = {
   evasion: z.coerce.number().min(-10).max(15),
   luck: z.coerce.number().min(-10).max(15),
   speed: z.coerce.number().min(-10).max(15),
+  courage: z.coerce.number().min(0).max(9),
+  understanding: z.coerce.number().min(0).max(9),
 };
 export const NewSurvivorSchema = z.object(schema);
 
@@ -58,6 +60,8 @@ export default function NewSurvivorModal() {
       evasion: 0,
       luck: 0,
       speed: 0,
+      courage: 0,
+      understanding: 0,
     },
   });
   const submitForm = async (values: NewSurvivorFields) => {
@@ -88,8 +92,8 @@ export default function NewSurvivorModal() {
       systemicPressure: 0,
       torment: 0,
       lumi: 0,
-      courage: 0,
-      understanding: 0,
+      courage: values.courage,
+      understanding: values.understanding,
     };
     await CreateSurvivor(newbie, settlementId, token);
     queryClient.invalidateQueries({ queryKey: [PopulationQueryKey] });
@@ -112,7 +116,7 @@ export default function NewSurvivorModal() {
         <Plus className="size-4" />
       </Button>
       <Modal
-        className="default"
+        className="default max-h-fit"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         placement="top-center"
@@ -304,6 +308,72 @@ export default function NewSurvivorModal() {
                           value={"" + field.value}
                           onChange={field.onChange}
                           validate={validator("speed")}
+                        />
+                      )}
+                    />
+                    <Controller
+                      name="courage"
+                      rules={{
+                        required: true,
+                      }}
+                      control={control}
+                      render={({ field }) => (
+                        <Slider
+                          aria-label="Courage"
+                          label="Courage"
+                          value={field.value}
+                          onChange={field.onChange}
+                          size="md"
+                          step={1}
+                          color="primary"
+                          showSteps={true}
+                          maxValue={9}
+                          minValue={0}
+                          defaultValue={0}
+                          className="max-w-md col-span-3"
+                          marks={[
+                            {
+                              value: 3,
+                              label: "Bold",
+                            },
+                            {
+                              value: 9,
+                              label: "Truth",
+                            },
+                          ]}
+                        />
+                      )}
+                    />
+                    <Controller
+                      name="understanding"
+                      rules={{
+                        required: true,
+                      }}
+                      control={control}
+                      render={({ field }) => (
+                        <Slider
+                          aria-label="Understanding"
+                          label="Understanding"
+                          value={field.value}
+                          onChange={field.onChange}
+                          size="md"
+                          step={1}
+                          color="primary"
+                          showSteps={true}
+                          maxValue={9}
+                          minValue={0}
+                          defaultValue={0}
+                          className="max-w-md col-span-3"
+                          marks={[
+                            {
+                              value: 3,
+                              label: "Insight",
+                            },
+                            {
+                              value: 9,
+                              label: "Secret",
+                            },
+                          ]}
                         />
                       )}
                     />
