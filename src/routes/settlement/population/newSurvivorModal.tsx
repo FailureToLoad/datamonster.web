@@ -186,7 +186,11 @@ export default function NewSurvivorModal() {
                           maxValue={16}
                           minValue={0}
                           defaultValue={0}
-                          className="max-w-md col-span-6"
+                          classNames={{
+                            base: "max-w-md col-span-6",
+                            filler:
+                              "bg-gradient-to-r from-primary-900 to-secondary-200",
+                          }}
                           marks={[
                             {
                               value: 2,
@@ -330,7 +334,11 @@ export default function NewSurvivorModal() {
                           maxValue={9}
                           minValue={0}
                           defaultValue={0}
-                          className="max-w-md col-span-3"
+                          classNames={{
+                            base: "max-w-md col-span-3",
+                            filler:
+                              "bg-gradient-to-r from-primary-900 to-secondary-200",
+                          }}
                           marks={[
                             {
                               value: 3,
@@ -363,7 +371,11 @@ export default function NewSurvivorModal() {
                           maxValue={9}
                           minValue={0}
                           defaultValue={0}
-                          className="max-w-md col-span-3"
+                          classNames={{
+                            base: "max-w-md col-span-3",
+                            filler:
+                              "bg-gradient-to-r from-primary-900 to-secondary-200",
+                          }}
                           marks={[
                             {
                               value: 3,
