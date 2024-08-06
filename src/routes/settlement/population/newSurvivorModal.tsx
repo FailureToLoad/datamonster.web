@@ -112,6 +112,7 @@ export default function NewSurvivorModal() {
         <Plus className="size-4" />
       </Button>
       <Modal
+        className="default"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         placement="top-center"
@@ -176,7 +177,7 @@ export default function NewSurvivorModal() {
                           onChange={field.onChange}
                           size="md"
                           step={1}
-                          color="foreground"
+                          color="primary"
                           showSteps={true}
                           maxValue={16}
                           minValue={0}
@@ -211,7 +212,8 @@ export default function NewSurvivorModal() {
                       control={control}
                       render={({ field }) => (
                         <Input
-                          autoFocus
+                          className="text-center"
+                          type="number"
                           aria-label="Movement"
                           label="MOV"
                           value={"" + field.value}
@@ -228,7 +230,7 @@ export default function NewSurvivorModal() {
                       control={control}
                       render={({ field }) => (
                         <Input
-                          autoFocus
+                          type="number"
                           aria-label="Accuracy"
                           label="ACC"
                           value={"" + field.value}
@@ -245,7 +247,7 @@ export default function NewSurvivorModal() {
                       control={control}
                       render={({ field }) => (
                         <Input
-                          autoFocus
+                          type="number"
                           aria-label="Strength"
                           label="STR"
                           value={"" + field.value}
@@ -262,7 +264,7 @@ export default function NewSurvivorModal() {
                       control={control}
                       render={({ field }) => (
                         <Input
-                          autoFocus
+                          type="number"
                           aria-label="Evasion"
                           label="EVA"
                           value={"" + field.value}
@@ -279,7 +281,7 @@ export default function NewSurvivorModal() {
                       control={control}
                       render={({ field }) => (
                         <Input
-                          autoFocus
+                          type="number"
                           aria-label="Luck"
                           label="LUCK"
                           value={"" + field.value}
@@ -296,7 +298,7 @@ export default function NewSurvivorModal() {
                       control={control}
                       render={({ field }) => (
                         <Input
-                          autoFocus
+                          type="number"
                           aria-label="Speed"
                           label="SPD"
                           value={"" + field.value}
@@ -311,7 +313,7 @@ export default function NewSurvivorModal() {
                   <Button color="danger" variant="flat" onPress={onClose}>
                     Close
                   </Button>
-                  <Button className="bg-primary" type="submit">
+                  <Button className="bg-primary text-background" type="submit">
                     Add
                   </Button>
                 </ModalFooter>
