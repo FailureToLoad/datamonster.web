@@ -38,6 +38,11 @@ const schema = {
   speed: z.coerce.number().min(-10).max(15),
   courage: z.coerce.number().min(0).max(9),
   understanding: z.coerce.number().min(0).max(9),
+  insanity: z.coerce.number().min(0).max(1000),
+  survival: z.coerce.number().min(0).max(50),
+  lumi: z.coerce.number().min(0).max(100),
+  systemicPressure: z.coerce.number().min(0).max(100),
+  torment: z.coerce.number().min(0).max(100),
 };
 export const NewSurvivorSchema = z.object(schema);
 
@@ -62,6 +67,11 @@ export default function NewSurvivorModal() {
       speed: 0,
       courage: 0,
       understanding: 0,
+      insanity: 0,
+      survival: 1,
+      lumi: 0,
+      systemicPressure: 0,
+      torment: 0,
     },
   });
   const submitForm = async (values: NewSurvivorFields) => {
@@ -386,6 +396,96 @@ export default function NewSurvivorModal() {
                               label: "Secret",
                             },
                           ]}
+                        />
+                      )}
+                    />
+                    <Controller
+                      name="insanity"
+                      rules={{
+                        required: true,
+                      }}
+                      control={control}
+                      render={({ field }) => (
+                        <Input
+                          className="w-20"
+                          type="number"
+                          aria-label="Insanity"
+                          label="Insanity"
+                          value={"" + field.value}
+                          onChange={field.onChange}
+                          validate={validator("insanity")}
+                        />
+                      )}
+                    />
+                    <Controller
+                      name="survival"
+                      rules={{
+                        required: true,
+                      }}
+                      control={control}
+                      render={({ field }) => (
+                        <Input
+                          className="w-20"
+                          type="number"
+                          aria-label="Survival"
+                          label="Survival"
+                          value={"" + field.value}
+                          onChange={field.onChange}
+                          validate={validator("survival")}
+                        />
+                      )}
+                    />
+                    <Controller
+                      name="lumi"
+                      rules={{
+                        required: true,
+                      }}
+                      control={control}
+                      render={({ field }) => (
+                        <Input
+                          className="w-20"
+                          type="number"
+                          aria-label="Lumi"
+                          label="Lumi"
+                          value={"" + field.value}
+                          onChange={field.onChange}
+                          validate={validator("lumi")}
+                        />
+                      )}
+                    />
+                    <Controller
+                      name="systemicPressure"
+                      rules={{
+                        required: true,
+                      }}
+                      control={control}
+                      render={({ field }) => (
+                        <Input
+                          className="w-20"
+                          type="number"
+                          aria-label="S. Pressure"
+                          label="S. Pessure"
+                          value={"" + field.value}
+                          onChange={field.onChange}
+                          validate={validator("systemicPressure")}
+                        />
+                      )}
+                    />
+                    <Controller
+                      name="torment"
+                      rules={{
+                        required: true,
+                      }}
+                      control={control}
+                      render={({ field }) => (
+                        <Input
+                          className="w-20"
+                          type="number"
+                          aria-label="Torment"
+                          label="Torment"
+                          value={"" + field.value}
+                          onChange={field.onChange}
+                          validate={validator("torment")}
                         />
                       )}
                     />
