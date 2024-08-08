@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ark-ui/react": "^3.6.2",
     "@clerk/clerk-react": "^5.2.10",
     "@hookform/resolvers": "^3.9.0",
     "@nextui-org/react": "^2.4.6",

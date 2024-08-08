@@ -185,8 +185,6 @@ export default function NewSurvivorModal() {
                       control={control}
                       render={({ field }) => (
                         <Slider
-                          aria-label="Hunt Experience"
-                          label="Hunt XP"
                           value={field.value}
                           onChange={field.onChange}
                           size="md"
