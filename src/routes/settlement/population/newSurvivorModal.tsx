@@ -22,6 +22,7 @@ import { PopulationQueryKey } from "./survivorTable";
 import { Survivor } from "@/lib/types/survivor";
 import { useParams } from "react-router-dom";
 import { GenderFemale, GenderMale, Plus } from "@phosphor-icons/react";
+import HuntXPBar from "@/components/hunt-xp-bar";
 
 const schema = {
   name: z
@@ -140,353 +141,332 @@ export default function NewSurvivorModal() {
                   Add Survivor
                 </ModalHeader>
                 <ModalBody data-testid="create-settlement-content">
-                  <div className="grid grid-cols-6 gap-4">
-                    <Controller
-                      name="name"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          autoFocus
-                          className="col-span-5"
-                          aria-label="Survivor Name"
-                          label="Survivor Name"
-                          value={field.value}
-                          onChange={field.onChange}
-                          validate={validator("name")}
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="gender"
-                      control={control}
-                      render={({ field }) => (
-                        <RadioGroup
-                          value={field.value}
-                          onValueChange={field.onChange}
-                          className="flex flex-row"
-                        >
-                          <Radio value="M">
-                            <GenderMale />
-                          </Radio>
-                          <Radio value="F">
-                            <GenderFemale />
-                          </Radio>
-                        </RadioGroup>
-                      )}
-                    />
-                    <Controller
-                      name="huntXp"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Slider
-                          value={field.value}
-                          onChange={field.onChange}
-                          size="md"
-                          step={1}
-                          color="primary"
-                          showSteps={true}
-                          maxValue={16}
-                          minValue={0}
-                          defaultValue={0}
-                          classNames={{
-                            base: "max-w-md col-span-6",
-                            filler:
-                              "bg-gradient-to-r from-primary-900 to-secondary-200",
-                          }}
-                          marks={[
-                            {
-                              value: 2,
-                              label: "Age I",
-                            },
-                            {
-                              value: 6,
-                              label: "Age II",
-                            },
-                            {
-                              value: 10,
-                              label: "Age III",
-                            },
-                            {
-                              value: 16,
-                              label: "Retired",
-                            },
-                          ]}
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="movement"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          className="text-center"
-                          type="number"
-                          aria-label="Movement"
-                          label="MOV"
-                          value={"" + field.value}
-                          onChange={field.onChange}
-                          validate={validator("movement")}
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="accuracy"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          type="number"
-                          aria-label="Accuracy"
-                          label="ACC"
-                          value={"" + field.value}
-                          onChange={field.onChange}
-                          validate={validator("accuracy")}
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="strength"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          type="number"
-                          aria-label="Strength"
-                          label="STR"
-                          value={"" + field.value}
-                          onChange={field.onChange}
-                          validate={validator("strength")}
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="evasion"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          type="number"
-                          aria-label="Evasion"
-                          label="EVA"
-                          value={"" + field.value}
-                          onChange={field.onChange}
-                          validate={validator("evasion")}
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="luck"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          type="number"
-                          aria-label="Luck"
-                          label="LUCK"
-                          value={"" + field.value}
-                          onChange={field.onChange}
-                          validate={validator("luck")}
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="speed"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          type="number"
-                          aria-label="Speed"
-                          label="SPD"
-                          value={"" + field.value}
-                          onChange={field.onChange}
-                          validate={validator("speed")}
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="courage"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Slider
-                          aria-label="Courage"
-                          label="Courage"
-                          value={field.value}
-                          onChange={field.onChange}
-                          size="md"
-                          step={1}
-                          color="primary"
-                          showSteps={true}
-                          maxValue={9}
-                          minValue={0}
-                          defaultValue={0}
-                          classNames={{
-                            base: "max-w-md col-span-3",
-                            filler:
-                              "bg-gradient-to-r from-primary-900 to-secondary-200",
-                          }}
-                          marks={[
-                            {
-                              value: 3,
-                              label: "Bold",
-                            },
-                            {
-                              value: 9,
-                              label: "Truth",
-                            },
-                          ]}
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="understanding"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Slider
-                          aria-label="Understanding"
-                          label="Understanding"
-                          value={field.value}
-                          onChange={field.onChange}
-                          size="md"
-                          step={1}
-                          color="primary"
-                          showSteps={true}
-                          maxValue={9}
-                          minValue={0}
-                          defaultValue={0}
-                          classNames={{
-                            base: "max-w-md col-span-3",
-                            filler:
-                              "bg-gradient-to-r from-primary-900 to-secondary-200",
-                          }}
-                          marks={[
-                            {
-                              value: 3,
-                              label: "Insight",
-                            },
-                            {
-                              value: 9,
-                              label: "Secret",
-                            },
-                          ]}
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="insanity"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          className="w-20"
-                          type="number"
-                          aria-label="Insanity"
-                          label="Insanity"
-                          value={"" + field.value}
-                          onChange={field.onChange}
-                          validate={validator("insanity")}
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="survival"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          className="w-20"
-                          type="number"
-                          aria-label="Survival"
-                          label="Survival"
-                          value={"" + field.value}
-                          onChange={field.onChange}
-                          validate={validator("survival")}
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="lumi"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          className="w-20"
-                          type="number"
-                          aria-label="Lumi"
-                          label="Lumi"
-                          value={"" + field.value}
-                          onChange={field.onChange}
-                          validate={validator("lumi")}
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="systemicPressure"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          className="w-20"
-                          type="number"
-                          aria-label="S. Pressure"
-                          label="S. Pessure"
-                          value={"" + field.value}
-                          onChange={field.onChange}
-                          validate={validator("systemicPressure")}
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="torment"
-                      rules={{
-                        required: true,
-                      }}
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          className="w-20"
-                          type="number"
-                          aria-label="Torment"
-                          label="Torment"
-                          value={"" + field.value}
-                          onChange={field.onChange}
-                          validate={validator("torment")}
-                        />
-                      )}
-                    />
+                  <div className="flex flex-col gap-2">
+                    <div className="flex flex-row gap-2">
+                      <Controller
+                        name="name"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            className="col-span-5"
+                            aria-label="Survivor Name"
+                            label="Survivor Name"
+                            value={field.value}
+                            onChange={field.onChange}
+                            validate={validator("name")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="gender"
+                        control={control}
+                        render={({ field }) => (
+                          <RadioGroup
+                            value={field.value}
+                            onValueChange={field.onChange}
+                            className="flex flex-row"
+                          >
+                            <Radio value="M">
+                              <GenderMale />
+                            </Radio>
+                            <Radio value="F">
+                              <GenderFemale />
+                            </Radio>
+                          </RadioGroup>
+                        )}
+                      />
+                    </div>
+                    <div>
+                      <Controller
+                        name="huntXp"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <HuntXPBar
+                            value={field.value}
+                            updateValue={field.onChange}
+                          />
+                        )}
+                      />
+                    </div>
+                    <div className="flex flex-row gap-2">
+                      <Controller
+                        name="movement"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            className="text-center"
+                            type="number"
+                            aria-label="Movement"
+                            label="MOV"
+                            value={"" + field.value}
+                            onChange={field.onChange}
+                            validate={validator("movement")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="accuracy"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            type="number"
+                            aria-label="Accuracy"
+                            label="ACC"
+                            value={"" + field.value}
+                            onChange={field.onChange}
+                            validate={validator("accuracy")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="strength"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            type="number"
+                            aria-label="Strength"
+                            label="STR"
+                            value={"" + field.value}
+                            onChange={field.onChange}
+                            validate={validator("strength")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="evasion"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            type="number"
+                            aria-label="Evasion"
+                            label="EVA"
+                            value={"" + field.value}
+                            onChange={field.onChange}
+                            validate={validator("evasion")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="luck"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            type="number"
+                            aria-label="Luck"
+                            label="LUCK"
+                            value={"" + field.value}
+                            onChange={field.onChange}
+                            validate={validator("luck")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="speed"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            type="number"
+                            aria-label="Speed"
+                            label="SPD"
+                            value={"" + field.value}
+                            onChange={field.onChange}
+                            validate={validator("speed")}
+                          />
+                        )}
+                      />
+                    </div>
+                    <div className="flex flex-row gap-2">
+                      <Controller
+                        name="courage"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <Slider
+                            aria-label="Courage"
+                            label="Courage"
+                            value={field.value}
+                            onChange={field.onChange}
+                            size="md"
+                            step={1}
+                            color="primary"
+                            showSteps={true}
+                            maxValue={9}
+                            minValue={0}
+                            defaultValue={0}
+                            classNames={{
+                              base: "max-w-md col-span-3",
+                              filler:
+                                "bg-gradient-to-r from-primary-900 to-secondary-200",
+                            }}
+                            marks={[
+                              {
+                                value: 3,
+                                label: "Bold",
+                              },
+                              {
+                                value: 9,
+                                label: "Truth",
+                              },
+                            ]}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="understanding"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <Slider
+                            aria-label="Understanding"
+                            label="Understanding"
+                            value={field.value}
+                            onChange={field.onChange}
+                            size="md"
+                            step={1}
+                            color="primary"
+                            showSteps={true}
+                            maxValue={9}
+                            minValue={0}
+                            defaultValue={0}
+                            classNames={{
+                              base: "max-w-md col-span-3",
+                              filler:
+                                "bg-gradient-to-r from-primary-900 to-secondary-200",
+                            }}
+                            marks={[
+                              {
+                                value: 3,
+                                label: "Insight",
+                              },
+                              {
+                                value: 9,
+                                label: "Secret",
+                              },
+                            ]}
+                          />
+                        )}
+                      />
+                    </div>
+                    <div className="flex flex-row gap-2">
+                      <Controller
+                        name="insanity"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            className="w-20"
+                            type="number"
+                            aria-label="Insanity"
+                            label="Insanity"
+                            value={"" + field.value}
+                            onChange={field.onChange}
+                            validate={validator("insanity")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="survival"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            className="w-20"
+                            type="number"
+                            aria-label="Survival"
+                            label="Survival"
+                            value={"" + field.value}
+                            onChange={field.onChange}
+                            validate={validator("survival")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="lumi"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            className="w-20"
+                            type="number"
+                            aria-label="Lumi"
+                            label="Lumi"
+                            value={"" + field.value}
+                            onChange={field.onChange}
+                            validate={validator("lumi")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="systemicPressure"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            className="w-20"
+                            type="number"
+                            aria-label="S. Pressure"
+                            label="S. Pessure"
+                            value={"" + field.value}
+                            onChange={field.onChange}
+                            validate={validator("systemicPressure")}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="torment"
+                        rules={{
+                          required: true,
+                        }}
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            className="w-20"
+                            type="number"
+                            aria-label="Torment"
+                            label="Torment"
+                            value={"" + field.value}
+                            onChange={field.onChange}
+                            validate={validator("torment")}
+                          />
+                        )}
+                      />
+                    </div>
                   </div>
                 </ModalBody>
                 <ModalFooter>
